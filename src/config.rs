@@ -18,7 +18,7 @@ pub struct Config {
     pub network_type: Network,
     pub db_path: PathBuf,
     pub daemon_dir: PathBuf,
-    pub daemon_rpc_addr: SocketAddr,
+    pub daemon_rpc_addr: String,
     pub cookie: Option<String>,
     pub electrum_rpc_addr: SocketAddr,
     pub monitoring_addr: SocketAddr,
@@ -150,7 +150,7 @@ impl Config {
             Network::Regtest => 24224,
         };
 
-        let daemon_rpc_addr: SocketAddr = m
+        let daemon_rpc_addr: String = m
             .value_of("daemon_rpc_addr")
             .unwrap_or(&format!("127.0.0.1:{}", default_daemon_port))
             .parse()
